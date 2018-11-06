@@ -15,7 +15,7 @@ if (port== undefined) throw (`usage node ${filename} <PORT> `)
 
 const serv = http.createServer((req,res) => {
     res.statusCode = 200;
-  
+    console.log(req);
     return res.end('done');
 
 })
