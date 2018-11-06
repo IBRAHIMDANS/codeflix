@@ -1,32 +1,48 @@
-const http = require('http');
+const path = require ('path');
+const http = require ('http');
 const fs = require('fs');
-const url = require('url');
-const path = require('path');
+const url = require ('url')
 
-const hostname = "127.0.0.1"
-const port = process.argv[2];
+let port = process.argv[2];
 
-if (port== undefined|| port !== 1337 ) {const port = 1337;}
-const serv = http.createServer((req,res) => {
-  res.statusCode = 200;
-  const q = url.parse(req.url,true);
-  const path = q.pathname;
-  res.on('data', (data) => {
-    console.log("op");
-});
+if (port == undefined){
 
-  if (path === '/messages'){
-    let pathh = path.slice(1)
-    const value = { "messages" : []}
-    let d = new Date;
-    res.on
-    value.messages.push({"text" : data,"date" : d.toJSON()})
-    let file = fs.writeFileSync('text.json',JSON.stringify(value, null, 3))
-    let read = fs.readFileSync(text.json, 'utf8')
-  }
+ port = 1111
+ console.log(`Server is running at port ${port}`);
 
-  return res.end('done');
-})
-serv.listen(port, hostname, () => {
-  console.log(`Server running at port : 1337`);
-});
+ http.createServer(function (req, res) {
+
+   let q = url.parse(req.url,true);
+   let path = q.pathname.split('/')
+   let pathname = path[1]
+   let file = 'message.json'
+   let chatContent = {messages: []};
+
+   if (pathname === 'messages' && req.method === 'POST'){
+     req.on('data', function(chunk) {
+
+       chunk = chunk.toString();
+       let d = new Date();
+
+       if (fs.existsSync(file)){
+           fs.readFile(file, 'utf-8', (err,data) => {
+           if(err) throw(err);
+           let jsonParse = JSON.parse(data)
+           jsonParse.messages.push({text: chunk, date: d.toJSON()});
+           let jsonStringify = JSON.stringify(jsonParse,null,3)
+           fs.writeFileSync('message.json', jsonStringify, (err) => {
+           if(err) throw(err);
+         })
+       });
+       }else {
+           chatContent.messages.push({text: chunk, date: d.toJSON()});
+           fs.writeFileSync('message.json', JSON.stringify(chatContent,null,3));
+         }
+     })
+
+   } else {
+     console.log('fail');
+     }
+   res.end();
+ }).listen(port);
+}
