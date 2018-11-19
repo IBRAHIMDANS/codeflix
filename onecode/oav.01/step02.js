@@ -51,24 +51,24 @@ app.delete("/users/:id", function (req, res) {
   res.end()
 });
 
-  app.put("/users", function (req, res) {
-    const data ={
-      nickname : req.body.nickname,
-      email : req.body.email,
-      password : req.body.password
-    }
+app.put("/users", function (req, res) {
+  const data ={
+    nickname : req.body.nickname,
+    email : req.body.email,
+    password : req.body.password
+  }
 
-    db.run("INSERT INTO user (nickname,email,password) VALUES (?,?,?) ",data.firstName ,data.email,data.password)
-  });
+  db.run("INSERT INTO user (nickname,email,password) VALUES (?,?,?) ",data.firstName ,data.email,data.password)
+
   res.end()
 })
-  app.put("/users", function (req, res) {
+app.put("/users", function (req, res) {
 
-    db.run("UPDATE users SET nickname = ?", req.query.nickname, (err, row)=>{
-            if (err) res.status(500);
-            else res.status(202);  });
-  res.end()
-})
+  db.run("UPDATE users SET nickname = ?", req.query.nickname, (err, row)=>{
+    if (err) res.status(500);
+    else res.status(202);  });
+    res.end()
+  })
 
-app.listen(1818);
-//db.close();
+  app.listen(1818);
+  //db.close();
