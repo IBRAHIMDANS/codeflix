@@ -2,12 +2,14 @@ const express = require("express");
 const sqlite = require("sqlite3");
 const db = new sqlite.Database("myDb");
 const bodyParser = require("body-parser");
-const session = require("express-session"); 
+const session = require("express-session");
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session({secret:'ssshhhhhh'}));
+app.use(session({  resave : false,
+  saveUninitialized: false,
+  secret:'ssshhhhhh'}));
 
 db.serialize(function() {
   db.run(
