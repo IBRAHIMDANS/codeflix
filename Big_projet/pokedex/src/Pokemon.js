@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './css/Pokemon.css';
 
 class Pokemon extends Component {
@@ -10,8 +11,8 @@ class Pokemon extends Component {
   }
 
   componentDidMount(){
-  const id = this.props.match.params.id;
-  fetch('http://localhost:4242/pokemon/'+id)
+    const id = this.props.match.params.id;
+    fetch('http://localhost:4242/pokemon/'+id)
     .then(res => res.json())
     .then(data => this.setState({ pokemon: data }));
   }
@@ -20,21 +21,21 @@ class Pokemon extends Component {
     const { pokemon } = this.state;
     if (!pokemon) return <h1>Pas de données</h1>
     let attaques = pokemon.attaques.map((attaque, index) => (
-        <ul key={index}>
-            {Object.entries(attaque).map(([key, value]) => (
-                <li className="col" key={key}> <b> {key}</b>: {value}</li>
+      <ul key={index}>
+        {Object.entries(attaque).map(([key, value]) => (
+          <li className="col" key={key}> <b> {key}</b>: {value}</li>
 
-          ))}
-        </ul>
+        ))}
+      </ul>
     ))
 
     return (
       <div>
         <h1>  {pokemon.nom} </h1>
         <p></p>
-      <div className="red">
+        <div className="red">
           <div>
-            <img src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${pokemon.ndex}.png`} alt={`${pokemon.nom}`}></img>
+            <img className="imgOne" src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${pokemon.ndex}.png`} alt={`${pokemon.nom}`}></img>
           </div>
           <div className= "" key={pokemon.ndex}>
 
@@ -44,19 +45,14 @@ class Pokemon extends Component {
             <p> <b>Couleur : </b> {pokemon.couleur} </p>
             <p> <b>Attaques :</b> <div className="row">{attaques} </div></p>
           </div>
-</div>
         </div>
-    );
-  }
+
+        <Link to={`/`}>
+        <input type="button" className ="btn btn-primary" formAction="#" value="Back"/>
+      </Link>
+    </div>
+  );
+}
 }
 
 export default Pokemon;
-
-
-
-  // componentDidMount(){
-  //
-  // fetch('http://localhost:4242/pokemon/010')
-  //   .then(res => res.json())
-  //   .then(pokemon => this.setState({data: pokemon}, () => console.log(pokemon)))
-  // }

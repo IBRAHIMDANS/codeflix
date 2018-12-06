@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import PokemonList from './PokemonList.js'
 import Pokemon from './Pokemon.js'
-import './css/Pokemon.css';
 
 
 class App extends Component {
@@ -16,7 +15,7 @@ class App extends Component {
             <Route exact path="/" component={PokemonList} />
             <Route path="/pokemon/:id" component={Pokemon} />
           </Switch>
-      </BrowserRouter>
+        </BrowserRouter>
       </div>
     );
   }
