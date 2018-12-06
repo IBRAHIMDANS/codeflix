@@ -4,7 +4,7 @@ const json = JSON.parse(data)
 
 function links(router) {
 
-   router.get('/pokemons/:id', function(req, res) {
+   router.get('/pokemon/:id', function(req, res) {
     const idSelected = req.params.id
     const pokemon = json.find(element => {return idSelected == element.ndex} )
     res.send(pokemon)
@@ -17,11 +17,15 @@ function links(router) {
      {
       tab.push({
        id: item.ndex,
-       name: item.nom
+       name: item.nom,
+       type1 : item.type1,
+       type2 : item.type2,
+       couleur : item.couleur,
+       attaques : item.attaques,
       })
      }
 
-     console.log(tab);
+     // console.log(tab);
      res.send(tab)
    })
 
