@@ -31,7 +31,7 @@ class Pokemon extends Component {
     ))
     return (
       <div>
-        <h1>  {pokemon.nom} </h1>
+        <h1 className="mt-4"> <b> {pokemon.nom}</b> </h1>
         <p></p>
         <div className="red">
           <div>
@@ -47,7 +47,7 @@ class Pokemon extends Component {
             <p className="col-6" > <b>Nom (de): </b>{pokemon.nomde} </p>
 
             <p className="col-6" > <b>Espece: </b>{pokemon.espece} </p>
-            <p className="col-6" > <b>Taille: </b>{pokemon.taille} </p>
+            <p className="col-6" > <b>Taille: </b>{pokemon.taille} m </p>
             <p className="col-6" > <b>Poids: </b>{pokemon.poids} Kg </p>
             <p className="col-6" > <b>Expval: </b>{pokemon.expval} </p>
             <p className="col-6" > <b>ExpMax: </b>{pokemon.expmax} </p>

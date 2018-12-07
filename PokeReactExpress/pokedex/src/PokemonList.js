@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './css/PokemonList.css';
- import Search from './Pokemon.js'
+ // import Search from './Pokemon.js'
 import Header from './Header.js'
 
 
@@ -26,7 +26,7 @@ class PokemonList extends Component {
     const { pokemons } = this.state;
     return (
       <div className="container">
-        <div className="nav justify-content-end">
+        <div className="nav justify-content-end mt-4">
           <input type="text" className="search" id= "name" placeholder="search"/>
           <button className=" badge-pill btn-light"> Validate</button>
         </div>

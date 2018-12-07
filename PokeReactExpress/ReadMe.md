@@ -7,7 +7,8 @@ This app is a PokeDex, the website build with React, display pokemons informatio
 
  <h2>**EXPRESSJS REACT NODEJS BOOTSTRAP FONTAWESOME**</h2>
 
- Method	Route	Description
+ |Method	|Route	|Description
+
 GET	/	pokemons	Get all pokemons, with their informations
 GET	/pokemon/:pokemonId	Get all informations of a specific pokemon (by his ndex)
 
