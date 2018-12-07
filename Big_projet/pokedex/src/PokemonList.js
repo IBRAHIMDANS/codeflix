@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './css/PokemonList.css';
-// import Search from './Pokemon.js'
+ import Search from './Pokemon.js'
+import Header from './Header.js'
 
 
 
@@ -25,8 +26,12 @@ class PokemonList extends Component {
     const { pokemons } = this.state;
     return (
       <div className="container">
-        <h1> List of Pokemons </h1>
-
+        <div className="nav justify-content-end">
+          <input type="text" className="search" id= "name" placeholder="search"/>
+          <button className=" badge-pill btn-light"> Validate</button>
+        </div>
+        <Header/>
+        <h1 > <span className="badge  badge-pill badge-primary" > List of Pokemons </span></h1>
         <div className="row">
           {pokemons.map(element => {return (
             <div className="col btn btn-light" key={element.id}>
