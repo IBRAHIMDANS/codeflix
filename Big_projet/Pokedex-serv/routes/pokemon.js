@@ -10,6 +10,13 @@ function links(router) {
     res.send(pokemon)
     })
 
+   router.get('/pokemon/:name', function(req, res) {
+    const nom = req.params.name
+    const pokemon = json.find(element => {return nom == element.name} )
+    console.log(pokemon);
+    res.send(pokemon)
+    })
+
    router.get('/', function (req,res) {
 
     let tab = []
@@ -22,6 +29,7 @@ function links(router) {
        type2 : item.type2,
        couleur : item.couleur,
        attaques : item.attaques,
+       poids : item.poids,
       })
      }
 

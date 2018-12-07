@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './css/PokemonList.css';
+// import Search from './Pokemon.js'
+
 
 
 class PokemonList extends Component {
@@ -24,16 +26,17 @@ class PokemonList extends Component {
     return (
       <div className="container">
         <h1> List of Pokemons </h1>
-        <input type="text" className="search" placeholder="search"/> <button className=" btn-danger"> Validate</button>
 
         <div className="row">
           {pokemons.map(element => {return (
-            <div className="col" key={element.id}>
+            <div className="col btn btn-light" key={element.id}>
               <img src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${element.id}.png`} alt={`${element.nom}` } className="imglist"></img>
-              <p > Nom du Pokemon : {element.name} </p>
-              <p> Type1 : {element.type1} </p>
-              <p> Type2 : {element.type2} </p>
-              <p> Couleur : {element.couleur} </p>
+              <p > <b> Pokemon N° :</b> {element.id} </p>
+              <p > <b> Nom :</b> {element.name} </p>
+              <p> <b> Type1 :</b> {element.type1} </p>
+              {  (! element.type2)?  <p> </p> : <p> <b>Type2 :</b> {element.type2} </p> }
+              <p> <b> Couleur :</b> {element.couleur} </p>
+              <p> <b> Poids :</b> {element.poids} Kg </p>
               <Link to={`/pokemon/${element.id}`}>
               <input type="button" className ="btn btn-primary" formAction="#" value="Afficher les infos"/>
             </Link>
