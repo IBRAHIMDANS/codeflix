@@ -4,6 +4,7 @@ const db = new sqlite.Database("data/Appartoo.sqlite");
 class NotebookModel {
 
   static create(note, res) {
+    
     db.run(
       `INSERT INTO notebook (firstname,lastname,email,familly,address,id_user)
     VALUES('${note.firstname}',
@@ -23,7 +24,7 @@ class NotebookModel {
   }
 
 
-  static update(note, res) {
+  static update(note, res, id) {
     db.run(
       `UPDATE notebook set
               firstname = '${note.firstname}',
@@ -31,7 +32,7 @@ class NotebookModel {
               email = '${note.email}',
               familly = '${note.familly}',
               address = '${note.address}',
-              WHERE id_notebook = '${note.id_notebook}'`,
+              WHERE id_notebook = '${id}'`,
       err => {
         console.log(err);
         if (err) res.send(err);
@@ -41,17 +42,19 @@ class NotebookModel {
   }
 
 
-  static delete(id, res) {
+  static deleteNote(id, res) {
   db.get(`DELETE  from notebook where id_notebook = ${id}`, (err, row) => {
     if (err) res.send(err);
     else res.render('../views/notebooks.ejs', { title: 'Notebook' });
   });
 }
-  static getNote(id, res) {
+  static getNote(res,id) {
+
   db.get(`SELECT * from notebook where id_user = ${id}`, (err, row) => {
-    console.log(id);
     if (err) res.send(err);
-    else res.render('../views/notebooks.ejs', { title: 'Notebook', note : row });
+    else res.render('../views/note.ejs', { title: 'Notebook', note : row });
+    console.log(row);
+    
   });
 }
 

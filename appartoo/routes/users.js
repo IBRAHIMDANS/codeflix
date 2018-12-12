@@ -3,30 +3,41 @@ var router = express.Router();
 
 const userModel = require('../models/users');
 
-
-router.get('/', function(req, res, next) {
+// Page home
+  router.get('/', function(req, res, next) {
   res.render('index', { title: 'home', err : "" });
-});
-router.get('/inscription', function(req, res, next) {
+})
+// page Inscription
+  .get('/inscription', function(req, res, next) {
   res.render('inscription', { title: 'inscription' });
-});
-router.post('/Connexion', function(req, res, next) {
+})
+// Connexion 
+  .post('/Connexion', function(req, res, next) {
   const data = {
   username: req.body.username,
   password: req.body.password,
-};
+}
   userModel.login(data,req,res);
 
-});
-
-router.post('/inscription', function(req, res, next) {
+})
+// Creation de l'utilisateur
+  .post('/inscription', function(req, res, next) {
   const data = {
-    username : req.body.username,
-    password : req.body.password,
+      id: req.body.id,
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      username: req.body.username,
+      password: req.body.password,
+      email: req.body.email,
+      age: req.body.age,
+      familly: req.body.familly,
+      food: req.body.food,
+      race: req.body.race,
   }
   userModel.create(data, res);
-});
-router.put('/user', function(req, res, next) {
+})
+// Modification de l'utilisateur
+  .put('/user', function(req, res, next) {
   const data = {
     id : req.body.id,
     firstname : req.body.firstname,
@@ -39,6 +50,6 @@ router.put('/user', function(req, res, next) {
   }
   console.log(data);
   userModel.update(data, res);
-});
+})
 
-module.exports = router;
+module.exports =  router ;
