@@ -1,25 +1,36 @@
-const sqlite = require("sqlite3");
+const sqlite = require("sqlite3").verbose();
 const db = new sqlite.Database("data/Appartoo.sqlite");
 
 class NotebookModel {
 
-  static create(note, res) {
-    
+  static create(data, req, res) {
+
     db.run(
       `INSERT INTO notebook (firstname,lastname,email,familly,address,id_user)
-    VALUES('${note.firstname}',
-           '${note.lastname}',
-           '${note.email}',
-           '${note.familly}',
-           '${note.address}',
-           '${note.id_user}')`,
-           (err, row) => {
-             if (err) {
-               res.render('../views/notebooks.ejs', { title: 'Notebook', err : err })
-             } else {
-               res.render('../views/notebooks.ejs', { title: 'Notebook',err:'' })
-             }
-           }
+    VALUES('${data.firstname}',
+           '${data.lastname}',
+           '${data.email}',
+           '${data.familly}',
+           '${data.address}',
+           '${data.id_user}')`,
+      (err, row) => {
+        if (!row) {
+          res.render(`../views/note`, {
+            title: 'Notebook',
+            err: err,
+            id: data.id_user,
+            note: data.note
+          })
+        } else {
+          res.render(`../views/note`, {
+            title: 'Notebook',
+            err: '',
+            id: data.id_user,
+            note: data.note
+          })
+        }
+        console.log(row, err)
+      }
     );
   }
 
@@ -32,31 +43,47 @@ class NotebookModel {
               email = '${note.email}',
               familly = '${note.familly}',
               address = '${note.address}',
-              WHERE id_notebook = '${id}'`,
+              WHERE id_notebook = '${note.id_notebook}'`,
       err => {
         console.log(err);
         if (err) res.send(err);
-        else res.render('../views/notebooks.ejs', { title: 'Notebook' });
+        else res.render('../views/note.ejs', {
+          title: 'Notebook'
+        });
       }
     );
   }
 
 
   static deleteNote(id, res) {
-  db.get(`DELETE  from notebook where id_notebook = ${id}`, (err, row) => {
-    if (err) res.send(err);
-    else res.render('../views/notebooks.ejs', { title: 'Notebook' });
-  });
-}
-  static getNote(res,id) {
+    db.get(`DELETE  from notebook where id_notebook = ${id}`, (err, row) => {
+      if (err) res.send(err);
+      else res.render('../views/note.ejs', {
+        title: 'Notebook'
+      });
+    });
+  }
 
-  db.get(`SELECT * from notebook where id_user = ${id}`, (err, row) => {
-    if (err) res.send(err);
-    else res.render('../views/note.ejs', { title: 'Notebook', note : row });
-    console.log(row);
-    
-  });
-}
+  static getNote(req, res, id) {
+
+    db.all(`SELECT * from notebook where id_user = ${id}`, (err, row) => {
+      if (!row) {
+        return res.render('../views/note.ejs', {
+          title: "Notebook",
+          note: row
+        });
+      } else {
+        res.render('../views/note.ejs', {
+          title: 'Notebook',
+          note: row,
+          id
+        });
+        console.log(row[0]);
+
+      }
+
+    });
+  }
 
 
 

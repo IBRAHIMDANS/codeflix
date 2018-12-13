@@ -7,11 +7,19 @@ a {
   color: #00B7FF;
 
 }
+.w-15{
+  width: 15rem
+}
 .form-signin {
   width: 100%;
   max-width: 330px;
   padding: 15px;
   margin: auto;
+}
+.form-note {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
 }
 .form-signin .checkbox {
   font-weight: 400;

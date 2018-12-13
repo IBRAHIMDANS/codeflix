@@ -3,24 +3,29 @@ var router = express.Router();
 
 const NotebookModel = require('../models/notebook');
 
-
+// Get Note by ID
 router.get('/:id', function(req, res, next) {
   const id = req.params.id
-
-console.log(id);
-
   NotebookModel.getNote(req,res,id)
-});
+})
 
-router.post('/Connexion', function(req, res, next) {
+ //Add User
+.post('/adduser', function(req, res, next) {
   const data = {
-  username: req.body.username,
-  password: req.body.password,
+  firstname: req.body.firstname,
+  lastname: req.body.lastname,
+  email: req.body.email,
+  familly: req.body.familly,
+  address: req.body.address,
+  id_user: req.body.id_user,
+  note: req.body.note,
 };
-  userModel.addNote(data,req,res);
-});
 
-router.put('/user', function(req, res, next) {
+  NotebookModel.create(data, req, res);
+})
+
+ // Update a note
+.put('/user', function(req, res, next) {
   const data = {
     id : req.body.id,
     firstname : req.body.firstname,
@@ -32,9 +37,11 @@ router.put('/user', function(req, res, next) {
     race : req.body.race,
   }
   console.log(data);
-  userModel.update(data, res);
-});
-router.delete('/user', function(req, res, next) {
+  NotebookModel.update(data, res);
+})
+ 
+// Delete User by Id
+.delete('/user', function(req, res, next) {
   const data = {
     id : req.body.id,
     firstname : req.body.firstname,
@@ -46,7 +53,7 @@ router.delete('/user', function(req, res, next) {
     race : req.body.race,
   }
   console.log(data);
-  userModel.update(data, res);
+  NotebookModel.update(data, res);
 });
 
 module.exports = router;
