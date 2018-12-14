@@ -8,4 +8,6 @@ db.serialize(function () {
     db.run("CREATE TABLE IF NOT EXISTS notebook (id_notebook INTEGER PRIMARY KEY AUTOINCREMENT,firstname TEXT,lastname TEXT,email TEXT,familly Text,address TEXT,id_user INTEGER,FOREIGN KEY(id_user) REFERENCES users(id_user))");
 });
 
-module.exports = { db } ;
+module.exports = {
+    db
+};

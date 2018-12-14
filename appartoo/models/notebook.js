@@ -55,13 +55,13 @@ class NotebookModel {
 
   static deleteNote(id, note, res) {
     db.all(`DELETE  from notebook where id_notebook = ${id}`, (err, row) => {
-     console.log(id,row);
-     
+      console.log(id, row);
+
       if (err) res.send(err.message);
       else res.render('../views/note.ejs', {
         title: 'Notebook',
         note,
-        
+
       });
     });
   }
