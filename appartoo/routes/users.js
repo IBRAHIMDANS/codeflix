@@ -16,6 +16,7 @@ router.get('/', function (req, res, next) {
       title: 'inscription'
     });
   })
+
   // Connexion 
   .post('/Connexion', function (req, res, next) {
     const data = {
@@ -28,7 +29,6 @@ router.get('/', function (req, res, next) {
   // Creation de l'utilisateur
   .post('/inscription', function (req, res, next) {
     const data = {
-      id: req.body.id,
       firstname: req.body.firstname,
       lastname: req.body.lastname,
       username: req.body.username,

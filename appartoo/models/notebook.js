@@ -2,7 +2,7 @@ const sqlite = require("sqlite3").verbose();
 const db = new sqlite.Database("data/Appartoo.sqlite");
 
 class NotebookModel {
-
+  // create note in notebook
   static create(data, req, res) {
 
     db.run(
@@ -33,7 +33,7 @@ class NotebookModel {
     );
   }
 
-
+  // update a note  after verification id_user and id_notebook
   static update(note, res, id) {
     db.run(
       `UPDATE notebook 
@@ -45,21 +45,21 @@ class NotebookModel {
       address = '${note.address}'
       WHERE id_notebook = '${note.id_notebook}'
       AND id_user = '${note.id_user}' `,
-      (err,row) => {
-        
+      (err, row) => {
+
         if (err) res.send(err.message);
         else res.render('../views/note', {
           title: 'Notebook',
           id: note.id_user,
           note
         });
-        console.log(err,row);
-        
+
+
       }
     );
   }
 
-
+  // delete a note by id
   static deleteNote(id, note, res) {
     db.all(`DELETE  from notebook where id_notebook = ${id}`, (err, row) => {
       console.log(id, row);
@@ -72,7 +72,7 @@ class NotebookModel {
       });
     });
   }
-
+  //Get
   static getNote(req, res, id) {
 
     db.all(`SELECT * from notebook where id_user = ${id}`, (err, row) => {
@@ -95,7 +95,38 @@ class NotebookModel {
     });
   }
 
+  static getInfos(id, req, res) {
 
+    db.get(`SELECT * FROM users WHERE id_user ='${id}'`, (err, row) => {
+
+      if (!row) {
+        res.render('../views/index.ejs', {
+          title: 'home',
+          err: row
+        });
+
+      } else {
+        const view = {
+          Prenom: row.firstname,
+          Nom: row.lastname,
+          email: row.email,
+          age: row.age + ' ans',
+          famille: row.familly,
+          nourriture: row.food,
+          race: row.race,
+        };
+
+        res.render('../views/user.ejs', {
+          title: 'Notebook',
+          row,
+          user: view
+        });
+      }
+
+
+    });
+
+  }
 
 
 }

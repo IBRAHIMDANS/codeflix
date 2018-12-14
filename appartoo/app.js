@@ -10,6 +10,7 @@ var cors = require('cors')
 
 
 var api = require("./routes")
+var db = require("./models")
 
 
 

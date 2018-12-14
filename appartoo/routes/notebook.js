@@ -9,6 +9,12 @@ router.get('/:id', function (req, res, next) {
     NotebookModel.getNote(req, res, id)
   })
 
+  //back info
+  .get('/infos/:id', function (req, res, next) {
+    const id = req.params.id
+    console.log(id);
+    NotebookModel.getInfos(id, req, res);
+  })
   //Add User
   .post('/adduser', function (req, res, next) {
     const data = {

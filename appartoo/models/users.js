@@ -2,20 +2,20 @@ const sqlite = require("sqlite3");
 const db = new sqlite.Database("data/Appartoo.sqlite");
 
 class userModel {
+
   static create(user, res) {
-    console.log(user);
 
     db.run(
       `INSERT INTO users (firstname,lastname,email,username,password,age,familly,food,race)
-    VALUES('${user.firstname}',
-           '${user.lastname}',
-           '${user.email}',
-           '${user.username}',
-           '${user.password}',
-           '${user.age}',
-           '${user.familly}',
-           '${user.food}',
-           '${user.race}')`,
+      VALUES('${user.firstname}',
+      '${user.lastname}',
+      '${user.email}',
+      '${user.username}',
+      '${user.password}',
+      '${user.age}',
+      '${user.familly}',
+      '${user.food}',
+      '${user.race}')`,
       (err, row) => {
         if (err) {
           res.render('../views/index.ejs', {
@@ -27,6 +27,9 @@ class userModel {
             title: 'home',
             err: ''
           })
+          console.log(user);
+          console.log(err, row);
+
         }
       }
     );
@@ -90,7 +93,6 @@ class userModel {
 
     });
   }
-
 
 }
 
