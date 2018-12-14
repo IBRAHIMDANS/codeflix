@@ -36,18 +36,25 @@ class NotebookModel {
 
   static update(note, res, id) {
     db.run(
-      `UPDATE notebook set
-              firstname = '${note.firstname}',
-              lastname = '${note.lastname}',
-              email = '${note.email}',
-              familly = '${note.familly}',
-              address = '${note.address}',
-              WHERE id_notebook = '${note.id_notebook}'`,
-      err => {
-        if (err) res.send(err);
+      `UPDATE notebook 
+      SET
+      firstname = '${note.firstname}',
+      lastname = '${note.lastname}',
+      email = '${note.email}',
+      familly = '${note.familly}',
+      address = '${note.address}'
+      WHERE id_notebook = '${note.id_notebook}'
+      AND id_user = '${note.id_user}' `,
+      (err,row) => {
+        
+        if (err) res.send(err.message);
         else res.render('../views/note', {
-          title: 'Notebook'
+          title: 'Notebook',
+          id: note.id_user,
+          note
         });
+        console.log(err,row);
+        
       }
     );
   }
@@ -78,8 +85,10 @@ class NotebookModel {
         res.render('../views/note.ejs', {
           title: 'Notebook',
           note: row,
+          id_notebook: row.id_notebook,
           id
         });
+
 
       }
 

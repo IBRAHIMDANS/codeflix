@@ -27,14 +27,13 @@ router.get('/:id', function (req, res, next) {
   // Update a note
   .put('/update', function (req, res, next) {
     const data = {
-      id: req.body.id,
+      id: req.body.id_notebook,
       firstname: req.body.firstname,
       lastname: req.body.lastname,
       email: req.body.email,
-      age: req.body.age,
       familly: req.body.familly,
-      food: req.body.food,
-      race: req.body.race,
+      adress: req.body.address,
+      id_user: req.body.id_user,
     }
     console.log(data);
     NotebookModel.update(data, res);
