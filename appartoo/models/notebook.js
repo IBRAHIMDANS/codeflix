@@ -29,7 +29,6 @@ class NotebookModel {
             note: data.note
           })
         }
-        console.log(row, err)
       }
     );
   }
@@ -45,9 +44,8 @@ class NotebookModel {
               address = '${note.address}',
               WHERE id_notebook = '${note.id_notebook}'`,
       err => {
-        console.log(err);
         if (err) res.send(err);
-        else res.render('../views/note.ejs', {
+        else res.render('../views/note', {
           title: 'Notebook'
         });
       }
@@ -55,11 +53,15 @@ class NotebookModel {
   }
 
 
-  static deleteNote(id, res) {
-    db.get(`DELETE  from notebook where id_notebook = ${id}`, (err, row) => {
-      if (err) res.send(err);
+  static deleteNote(id, note, res) {
+    db.all(`DELETE  from notebook where id_notebook = ${id}`, (err, row) => {
+     console.log(id,row);
+     
+      if (err) res.send(err.message);
       else res.render('../views/note.ejs', {
-        title: 'Notebook'
+        title: 'Notebook',
+        note,
+        
       });
     });
   }
@@ -78,7 +80,6 @@ class NotebookModel {
           note: row,
           id
         });
-        console.log(row[0]);
 
       }
 

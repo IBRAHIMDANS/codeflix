@@ -40,20 +40,12 @@ router.get('/:id', function(req, res, next) {
   NotebookModel.update(data, res);
 })
  
-// Delete User by Id
-.delete('/user', function(req, res, next) {
-  const data = {
-    id : req.body.id,
-    firstname : req.body.firstname,
-    lastname : req.body.lastname,
-    email : req.body.email,
-    age : req.body.age,
-    familly : req.body.familly,
-    food : req.body.food,
-    race : req.body.race,
-  }
-  console.log(data);
-  NotebookModel.update(data, res);
+// Delete Note by Id
+.delete('/del', function(req, res, next) {
+    const id = req.body.id_notebook
+    const note = req.body.note
+ 
+  NotebookModel.deleteNote(id, note,res);
 });
 
 module.exports = router;
