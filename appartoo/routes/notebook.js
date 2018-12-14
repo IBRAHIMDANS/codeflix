@@ -25,7 +25,7 @@ router.get('/:id', function(req, res, next) {
 })
 
  // Update a note
-.put('/user', function(req, res, next) {
+.put('/update', function(req, res, next) {
   const data = {
     id : req.body.id,
     firstname : req.body.firstname,
