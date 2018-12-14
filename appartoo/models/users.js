@@ -27,8 +27,7 @@ class userModel {
             title: 'home',
             err: ''
           })
-          console.log(user);
-          console.log(err, row);
+
 
         }
       }
@@ -47,7 +46,7 @@ class userModel {
               race = '${user.race}'
               WHERE id_user = '${user.id}'`,
       err => {
-        console.log(err);
+
         if (err) res.send(err);
         else res.render('../views/user.ejs', {
           title: 'Notebook'

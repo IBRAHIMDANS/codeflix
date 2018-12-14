@@ -12,7 +12,7 @@ router.get('/:id', function (req, res, next) {
   //back info
   .get('/infos/:id', function (req, res, next) {
     const id = req.params.id
-    console.log(id);
+
     NotebookModel.getInfos(id, req, res);
   })
   //Add User
@@ -41,7 +41,7 @@ router.get('/:id', function (req, res, next) {
       adress: req.body.address,
       id_user: req.body.id_user,
     }
-    console.log(data);
+ 
     NotebookModel.update(data, res);
   })
 

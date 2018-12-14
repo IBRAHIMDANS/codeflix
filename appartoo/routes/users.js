@@ -53,7 +53,7 @@ router.get('/', function (req, res, next) {
       food: req.body.food,
       race: req.body.race,
     }
-    console.log(data);
+
     userModel.update(data, res);
   })
 

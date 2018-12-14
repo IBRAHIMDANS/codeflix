@@ -6,13 +6,11 @@
     </a>
 </div>
 <div class="text-center">
-
   <h1> Bienvenue l'Alien
     <%= user.Prenom%>
   </h1>
   <div class="mt-5"> </div>
   <div class="row">
-
     <div class="col">
       <h2><span class="badge badge-pill badge-primary">Vos Informations</span></h2>
       <p></p>
@@ -29,14 +27,12 @@
       </div>
     </div>
     <div class="col">
-      <h2><span class="badge badge-pill badge-primary add-btn"> <a href="/note/<%= row.id_user%>" name="<%= user.id_user %>">
+      <h2>
+        <span class="badge badge-pill badge-primary add-btn"> <a href="/note/<%= row.id_user%>" name="<%= user.id_user %>">
             <input type="hidden" name="id" value="<%= user.id_user %>"> Votre Notebook </a> </span></h2>
     </div>
-
   </div>
 </div>
-
-
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
